@@ -226,9 +226,9 @@
     </enum>
     <enum name="MAV_FRAME">
       <description>Co-ordinate frames used by MAVLink. Not all frames are supported by all commands, messages, or vehicles.
-      
+
       Global frames use the following naming conventions:
-      - "GLOBAL": Global co-ordinate frame with WGS84 latitude/longitude and altitude positive over mean sea level (MSL) by default. 
+      - "GLOBAL": Global co-ordinate frame with WGS84 latitude/longitude and altitude positive over mean sea level (MSL) by default.
         The following modifiers may be used with "GLOBAL":
         - "RELATIVE_ALT": Altitude is relative to the vehicle home position rather than MSL.
         - "TERRAIN_ALT": Altitude is relative to ground level rather than MSL.
@@ -6599,7 +6599,7 @@
         MAV_CMD_REQUEST_MESSAGE.param2 indicates the sequence number the first image to send, or set to -1 to send the message for all sequence numbers.
         MAV_CMD_REQUEST_MESSAGE.param3 is used to specify a range of messages to send:
         set to 0 (default) to send just the the message for the sequence number in param 2,
-        set to -1 to send the message for the sequence number in param 2 and all the following sequence numbers, 
+        set to -1 to send the message for the sequence number in param 2 and all the following sequence numbers,
         set to the sequence number of the final message in the range.</description>
       <field type="uint32_t" name="time_boot_ms" units="ms">Timestamp (time since system boot).</field>
       <field type="uint64_t" name="time_utc" units="us" invalid="0">Timestamp (time since UNIX epoch) in UTC. 0 for unknown.</field>
@@ -7218,14 +7218,14 @@
       <!-- This message is work-in-progress it can therefore change, and should NOT be used in stable production environments -->
       <description>
         Component metadata message, which may be requested using MAV_CMD_REQUEST_MESSAGE.
-        
+
         This contains the MAVLink FTP URI and CRC for the component's general metadata file.
         The file must be hosted on the component, and may be xz compressed.
         The file CRC can be used for file caching.
-        
+
         The general metadata file can be read to get the locations of other metadata files (COMP_METADATA_TYPE) and translations, which may be hosted either on the vehicle or the internet.
         For more information see: https://mavlink.io/en/services/component_information.html.
-        
+
         Note: Camera components should use CAMERA_INFORMATION instead, and autopilots may use both this message and AUTOPILOT_VERSION.
       </description>
       <field type="uint32_t" name="time_boot_ms" units="ms">Timestamp (time since system boot).</field>
@@ -7426,6 +7426,26 @@
       <field type="uint8_t" name="id" instance="true">Hygrometer ID</field>
       <field type="int16_t" name="temperature" units="cdegC">Temperature</field>
       <field type="uint16_t" name="humidity" units="c%">Humidity</field>
+    </message>
+    <message id="12921" name="TRUST_MOMENTS">
+      <description>Force and moments.</description>
+      <field type="uint64_t" name="timestamp" units="us">timestamp</field>
+      <field type="double" name="trust_x" units="N">trust_x</field>
+      <field type="double" name="trust_y" units="N">trust_y</field>
+      <field type="double" name="trust_z" units="N">trust_z</field>
+      <field type="double" name="moments_x" units="Nm">moments_x</field>
+      <field type="double" name="moments_y" units="Nm">moments_y</field>
+      <field type="double" name="moments_z" units="Nm">moments_z</field>
+    </message>
+    <message id="12922" name="ACTUATOR_OUTPUT">
+      <description>Actuator output.</description>
+      <field type="uint64_t" name="timestamp" units="us">timestamp</field>
+      <!-- <field type="float" name="motor1" units="">motor1</field>
+      <field type="float" name="motor2" units="">motor2</field>
+      <field type="float" name="motor3" units="">motor3</field>
+      <field type="float" name="motor4" units="">motor4</field> -->
+      <field type="uint8_t" name="actuator_size">Size of Actuators</field>
+      <field type="float[16]" name="outputs">Control outputs.</field>
     </message>
   </messages>
 </mavlink>
